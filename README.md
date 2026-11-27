@@ -20,7 +20,7 @@
 请实际部署 ROSETTE。从环境检查一直执行到验收和交接。部署、排错和可自动验证的步骤由你执行。等待我操作期间，继续完成其余可执行的步骤。遇到扫码、模型授权、DNS 修改或手机通知授权时，告诉我当前要操作的页面或命令、成功标志以及完成后如何通知你继续。
 
 部署信息（可预填，留空则先从现有环境识别）
-- ROSETTE 源码目录或 Git 仓库 URL / 分支：
+- ROSETTE 源码：优先使用本地源码。需要下载时运行 git clone --branch main https://github.com/ZLY123-123/ROSETTE-Reminder.git
 - 部署目标：本机 Linux，或 Linux 服务器的 SSH 别名 / 用户名和地址
 - 公网 HTTPS 工作台完整地址（含子路径和结尾斜杠，例如 https://example.com/reminder/）：
 - OpenClaw 模型供应商和模型（如已有专用实例则沿用其配置）：

@@ -20,7 +20,7 @@ Send the entire block to a coding agent with terminal access and permission to r
 Deploy ROSETTE on my behalf. Carry out the setup, troubleshooting, and automated checks through handoff. Continue any independent work while waiting for me. When I need to scan a QR code, authorize a model, change DNS, or grant phone notifications, show me the exact screen or command, what success looks like, and how to signal you to resume.
 
 Deployment inputs (fill in what you know)
-- ROSETTE source directory or Git repository URL and branch:
+- ROSETTE source: use the local checkout when available. To download it, run git clone --branch main https://github.com/ZLY123-123/ROSETTE-Reminder.git
 - Deployment target: this Linux machine, or a Linux host via an SSH alias or user/address
 - Full public HTTPS workbench URL, including the path and trailing slash, e.g. https://example.com/reminder/:
 - OpenClaw model provider and model (reuse the configuration of a dedicated instance if available):
