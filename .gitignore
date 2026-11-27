@@ -1,0 +1,27 @@
+.env
+.env.*
+!.env.example
+data/
+node_modules/
+*.log
+/ios/.build/
+/ios/.swiftpm/
+/ios/ReminderDesk.xcodeproj/
+/ios/output/
+xcuserdata/
+*.mobileprovision
+*.p12
+
+# Local runtime state and credentials
+.openclaw/
+.openclaw-*/
+accounts/
+backups/
+*.sqlite*
+*.db
+*.db-wal
+*.db-shm
+*.pem
+*.key
+*.ipa
+*.xcarchive/

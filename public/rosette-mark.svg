@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="rosette-title rosette-desc">
+  <title id="rosette-title">玫瑰星云</title>
+  <desc id="rosette-desc">蜜桃粉、玫瑰粉与淡紫色的星云层层围绕中央星团。</desc>
+  <defs>
+    <path id="rosette-cloud" fill-rule="evenodd" clip-rule="evenodd" d="
+      M113 30 C126 18 149 18 161 32 C170 42 178 43 190 41
+      C207 38 223 52 222 71 C221 82 221 89 228 100
+      C238 117 233 134 220 145 C211 152 210 160 212 170
+      C216 189 204 202 185 203 C173 203 166 208 159 218
+      C148 233 128 235 113 224 C104 217 95 216 84 218
+      C65 222 48 210 47 192 C46 181 40 175 30 168
+      C15 159 13 142 22 128 C29 118 30 110 26 100
+      C19 84 28 68 45 62 C56 58 61 52 66 42
+      C75 25 94 22 106 29 C109 31 111 31 113 30 Z
+      M116 86 C126 87 129 77 140 77 C151 76 158 85 159 97
+      C160 108 171 111 174 121 C177 132 168 138 159 144
+      C150 150 151 162 140 167 C130 172 122 168 115 161
+      C108 155 99 160 93 154 C85 147 89 137 87 130
+      C85 121 79 116 83 106 C87 95 98 97 104 92
+      C108 88 112 85 116 86 Z"/>
+    <clipPath id="rosette-clip"><use href="#rosette-cloud" clip-rule="evenodd"/></clipPath>
+    <linearGradient id="cloud-color" x1="48" y1="40" x2="213" y2="213" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffdfc6"/>
+      <stop offset=".35" stop-color="#f1a5b1"/>
+      <stop offset=".62" stop-color="#d98fb6"/>
+      <stop offset="1" stop-color="#a49bdf"/>
+    </linearGradient>
+    <radialGradient id="peach-cloud" cx="81" cy="61" r="89" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff4de"/>
+      <stop offset=".49" stop-color="#ffd1bd"/>
+      <stop offset="1" stop-color="#f2a0aa"/>
+    </radialGradient>
+    <linearGradient id="rose-cloud" x1="144" y1="49" x2="194" y2="149" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fbc2ca"/>
+      <stop offset=".48" stop-color="#eea1b8"/>
+      <stop offset="1" stop-color="#c578a9"/>
+    </linearGradient>
+    <linearGradient id="lilac-cloud" x1="192" y1="114" x2="130" y2="228" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f6bbce"/>
+      <stop offset=".57" stop-color="#d6b5e5"/>
+      <stop offset="1" stop-color="#9e92d7"/>
+    </linearGradient>
+    <linearGradient id="pink-cloud" x1="36" y1="116" x2="128" y2="229" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffd7c5"/>
+      <stop offset=".57" stop-color="#e8a2c2"/>
+      <stop offset="1" stop-color="#c1a1db"/>
+    </linearGradient>
+    <linearGradient id="cloud-rim" x1="59" y1="42" x2="198" y2="222" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff3de"/>
+      <stop offset=".44" stop-color="#ffe1df"/>
+      <stop offset="1" stop-color="#eee3ff"/>
+    </linearGradient>
+    <linearGradient id="cavity-rim" x1="94" y1="88" x2="157" y2="162" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c87a9d"/>
+      <stop offset=".55" stop-color="#bc7aaf"/>
+      <stop offset="1" stop-color="#9e86c4"/>
+    </linearGradient>
+    <linearGradient id="star-color" x1="116" y1="101" x2="142" y2="141" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff4dc"/>
+      <stop offset=".62" stop-color="#f9ccab"/>
+      <stop offset="1" stop-color="#e4a0a4"/>
+    </linearGradient>
+  </defs>
+
+  <use href="#rosette-cloud" fill="url(#cloud-color)"/>
+  <g clip-path="url(#rosette-clip)">
+    <path fill="url(#peach-cloud)" d="M18 110 C20 87 47 83 59 69 C70 56 67 39 84 33 C95 29 103 32 111 38 C121 45 132 38 141 34 C153 28 165 38 163 52 C160 68 145 64 133 72 C121 80 126 97 103 102 C87 106 74 94 57 99 C44 103 38 115 18 110 Z"/>
+    <path fill="url(#rose-cloud)" d="M118 76 C127 60 142 55 161 57 C178 60 180 46 196 47 C211 48 216 63 214 78 C212 91 224 98 226 112 C230 132 207 145 178 147 C155 148 141 132 153 115 C163 102 181 108 186 92 C190 79 180 71 166 72 C149 73 138 82 118 76 Z"/>
+    <path fill="url(#lilac-cloud)" d="M159 107 C180 100 206 106 211 121 C217 136 202 143 195 157 C187 170 205 177 195 190 C188 199 173 193 161 201 C148 210 142 223 128 221 C111 218 108 200 94 195 C82 190 72 191 64 179 C86 181 98 169 119 175 C134 179 144 185 156 175 C170 165 163 153 172 142 C182 130 191 125 185 118 C180 112 168 115 159 107 Z"/>
+    <path fill="url(#pink-cloud)" d="M31 123 C39 108 53 106 64 99 C77 91 86 86 102 88 C113 90 119 100 111 111 C101 123 81 117 72 131 C65 144 72 156 84 161 C96 166 112 159 123 175 C132 191 116 206 98 202 C84 199 76 204 65 196 C54 189 58 174 45 166 C28 155 20 143 31 123 Z"/>
+    <path fill="#fff3e1" opacity=".32" d="M31 92 C38 80 53 76 63 66 C74 54 72 42 88 38 C101 35 108 46 120 46 C131 46 139 35 150 38 C142 43 138 54 124 57 C110 61 102 48 90 52 C79 56 82 69 67 78 C56 85 43 84 31 92 Z"/>
+    <path fill="#b96c9d" opacity=".21" d="M218 106 C225 120 220 131 208 141 C197 151 194 161 200 171 C190 166 184 161 188 150 C193 135 215 129 218 106 Z"/>
+    <path fill="#fff1f6" opacity=".35" d="M49 149 C59 160 65 164 77 168 C87 171 99 164 108 173 C116 181 110 191 116 198 C105 195 108 183 99 179 C89 174 81 184 68 177 C58 171 56 161 49 149 Z"/>
+    <path fill="#f3dfff" opacity=".55" d="M144 205 C153 194 160 185 173 184 C182 183 190 186 196 179 C194 191 180 190 170 194 C160 198 154 208 144 205 Z"/>
+    <g fill="none" stroke="url(#cloud-rim)" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke-width="3.1" d="M37 92 C46 82 62 82 73 69 C84 56 78 46 92 42 C104 39 110 49 123 49 C134 48 140 38 151 41"/>
+      <path stroke-width="2.4" d="M144 61 C159 54 168 65 179 62 C188 60 194 53 202 57 C208 60 210 67 208 73"/>
+      <path stroke-width="3.2" d="M204 92 C203 105 215 109 215 120 C215 136 197 138 191 150 C184 162 195 171 188 180"/>
+      <path stroke-width="2.8" d="M37 135 C43 120 56 121 65 114 C73 107 82 100 94 102"/>
+      <path stroke-width="2.5" d="M48 155 C61 161 59 173 71 181 C83 190 95 182 105 186"/>
+      <path stroke-width="3.1" d="M119 204 C129 216 142 210 150 200 C159 189 166 187 179 187"/>
+      <path stroke-width="1.7" opacity=".75" d="M152 149 C163 143 166 133 162 123 M75 148 C69 141 72 133 77 128 M146 177 C157 174 160 165 161 159"/>
+    </g>
+    <path fill="none" stroke="url(#cavity-rim)" stroke-width="5" opacity=".66" d="M116 86 C126 87 129 77 140 77 C151 76 158 85 159 97 C160 108 171 111 174 121 C177 132 168 138 159 144 C150 150 151 162 140 167 C130 172 122 168 115 161 C108 155 99 160 93 154 C85 147 89 137 87 130 C85 121 79 116 83 106 C87 95 98 97 104 92 C108 88 112 85 116 86 Z"/>
+  </g>
+
+  <g stroke-linejoin="round">
+    <path fill="url(#star-color)" stroke="#b77c9d" stroke-width="2" d="M128 101 Q131 101 132 113 Q133 117 137 118 Q148 119 148 122 Q148 125 137 126 Q133 127 132 131 Q131 143 128 143 Q125 143 124 131 Q123 127 119 126 Q108 125 108 122 Q108 119 119 118 Q123 117 124 113 Q125 101 128 101 Z"/>
+    <path fill="#fff7eb" d="M128 112 Q129 120 138 122 Q129 123 128 132 Q127 123 118 122 Q127 120 128 112 Z"/>
+    <path fill="#d5b9e7" d="M148 131 Q149 138 156 139 Q149 141 148 148 Q146 141 140 139 Q146 138 148 131 Z"/>
+    <circle cx="108" cy="140" r="2.7" fill="#c594bc"/>
+    <circle cx="148" cy="101" r="2.4" fill="#ce99b4"/>
+    <circle cx="113" cy="105" r="1.7" fill="#d2b1db"/>
+  </g>
+  <path fill="#d2a8cb" d="M40 26 Q41 33 48 34 Q41 36 40 43 Q38 36 31 34 Q38 33 40 26 Z"/>
+  <circle cx="222" cy="215" r="3.3" fill="#c3a6d9"/>
+</svg>

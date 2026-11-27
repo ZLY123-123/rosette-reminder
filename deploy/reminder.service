@@ -1,0 +1,24 @@
+[Unit]
+Description=ROSETTE
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=reminder
+WorkingDirectory=/opt/reminder
+Environment=PATH=/usr/local/bin:/usr/bin:/bin
+Environment=HOME=/var/lib/reminder
+EnvironmentFile=-/etc/reminder/openclaw.env
+EnvironmentFile=/opt/reminder/.env
+ExecStart=/usr/bin/node /opt/reminder/src/server.mjs
+Restart=on-failure
+RestartSec=3
+StateDirectory=reminder
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

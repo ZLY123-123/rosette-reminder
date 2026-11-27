@@ -1,0 +1,4 @@
+reminder.example.com {
+	respond /api/agent/* 404
+	reverse_proxy 127.0.0.1:3100
+}

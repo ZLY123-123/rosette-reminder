@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4d7da">
+  <meta name="description" content="个人待办、微信对话和手机提醒">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./rosette-mark.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icon-180.png">
+  <link rel="stylesheet" href="./style.css">
+  <meta name="apple-mobile-web-app-title" content="ROSETTE">
+  <title>ROSETTE · 提醒工作台</title>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="page">
+    <aside class="rail">
+      <a class="brand" href="./" data-view="home"><img src="./rosette-mark.svg" alt=""><span>ROSETTE</span></a>
+      <nav id="navigation" class="navigation" aria-label="工作台导航" hidden>
+        <a href="./" data-view="home"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.2"/><rect x="14" y="3" width="7" height="7" rx="1.2"/><rect x="3" y="14" width="7" height="7" rx="1.2"/><rect x="14" y="14" width="7" height="7" rx="1.2"/></svg><span>概览</span></a>
+        <a href="./#tasks" data-view="tasks"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="17" rx="2"/><path d="M8 4V2m8 2V2m-8 8 2 2 5-5m-7 9h8"/></svg><span>待办</span></a>
+        <a href="./chat" data-view="chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l1.5-3A7.5 7.5 0 1 1 20 11.5Z"/><path d="M9 11.5h.01m3.5 0h.01m3.5 0h.01"/></svg><span>对话</span></a>
+        <a href="./#mailbox" data-view="alerts"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 6-3 7-3 7h18s-3-1-3-7m-8 11a2 2 0 0 0 4 0"/></svg><span>提醒</span><b class="nav-count" id="nav-unread" hidden></b></a>
+        <a href="./settings" data-view="settings"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/><path d="M8 5v4m8 1v4m-5 1v4"/></svg><span>设置</span></a>
+      </nav>
+      <div class="rail-footer" id="rail-footer" hidden>
+        <span id="rail-connection" class="hint"></span>
+      </div>
+    </aside>
+
+    <main class="stage">
+      <header class="masthead">
+        <div><p class="mast-note" id="today-label"></p><h2 id="view-title" tabindex="-1">提醒工作台</h2></div>
+        <div class="header-actions">
+          <button type="button" id="theme" class="quiet" aria-pressed="false">
+            <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.7 14.4A8.8 8.8 0 0 1 9.6 3.3a9 9 0 1 0 11.1 11.1Z"/></svg>
+            <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M19 5l-1.5 1.5m-11 11L5 19"/></svg>
+            <span id="theme-label">夜间</span>
+          </button>
+          <button type="button" id="logout" class="quiet" hidden>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H5v16h6m2-12 4 4-4 4m-4-4h12"/></svg>
+            <span>退出</span>
+          </button>
+        </div>
+      </header>
+      <p id="notice" role="status" aria-live="polite" hidden></p>
+      <section class="card login" id="login-card" hidden>
+        <h1>打开你的工作台<span>。</span></h1>
+        <form id="login-form">
+          <label>登录口令<input name="password" type="password" autocomplete="current-password" required></label>
+          <button class="primary" type="submit">登录</button>
+        </form>
+      </section>
+
+      <div id="workspace" hidden>
+        <section data-panel="home" hidden>
+          <div class="hero" id="dashboard-hero">
+            <div class="hero-content">
+              <h1 class="hero-title" lang="en">Time flies.</h1>
+              <div id="channel-status" class="channels"></div>
+              <div class="actions hero-actions"><a class="primary button-link" href="./#tasks" data-view="tasks" id="add-shortcut">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M4 12h16"/></svg><span>添加待办</span>
+              </a></div>
+            </div>
+            <div class="next-up">
+              <span class="hint">下一条提醒</span>
+              <strong id="next-title"></strong><time id="next-time" class="hint"></time>
+            </div>
+          </div>
+          <div class="overview-grid">
+            <section class="card overview-card overview-today">
+              <div class="section-line">
+                <h2 id="today-preview-heading"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="17" rx="2"/><path d="M8 4V2m8 2V2m-8 8 2 2 5-5m-7 9h8"/></svg>今日待办</h2>
+                <a class="quiet" href="./#tasks" data-view="tasks">全部</a>
+              </div>
+              <div id="today-preview" class="list panel-scroll" tabindex="0" role="region" aria-labelledby="today-preview-heading"></div>
+            </section>
+            <section class="card overview-card overview-inbox">
+              <div class="section-line">
+                <h2 id="inbox-preview-heading"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13l3-7a2 2 0 0 1 2-1h8a2 2 0 0 1 2 1l3 7v5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm0 0h6l1 3h4l1-3h6"/></svg>提醒收件箱</h2>
+                <a class="quiet" href="./#mailbox" data-view="alerts">打开</a>
+              </div>
+              <div id="inbox-preview" class="list panel-scroll" tabindex="0" role="region" aria-labelledby="inbox-preview-heading"></div>
+            </section>
+            <section class="card overview-card overview-chat">
+              <div class="section-line">
+                <h2 id="chat-preview-heading"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H5l1.5-3A7.5 7.5 0 1 1 20 11.5Z"/><path d="M9 11.5h.01m3.5 0h.01m3.5 0h.01"/></svg>微信对话</h2>
+                <a class="quiet" href="./chat" data-view="chat">查看</a>
+              </div>
+              <div id="chat-preview" class="list panel-scroll" tabindex="0" role="region" aria-labelledby="chat-preview-heading"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="task-layout" data-panel="tasks" hidden>
+          <section class="card agenda panel-art" id="agenda">
+            <div class="section-line"><h2 id="agenda-heading">待办计划</h2><span class="pill" id="pending-total"></span></div>
+            <div class="filters" aria-label="待办筛选">
+              <button type="button" class="quiet" data-filter="all" aria-pressed="true">待处理</button>
+              <button type="button" class="quiet" data-filter="today" aria-pressed="false">今天</button>
+              <button type="button" class="quiet" data-filter="done" aria-pressed="false">已完成</button>
+              <button type="button" class="quiet" data-filter="archived" aria-pressed="false">已归档</button>
+            </div>
+            <div class="list panel-scroll" id="tasks" tabindex="0" role="region" aria-labelledby="agenda-heading"></div>
+          </section>
+          <details class="card editor panel-art" id="task-editor" open>
+            <summary id="editor-heading">添加待办</summary>
+            <form id="task-form" class="task-form">
+              <label>事项<input name="title" maxlength="180" placeholder="例如：检查库存" required></label>
+              <div class="field-pair">
+                <label>提醒时间 <span class="hint">北京时间 · 可选</span><input name="due" type="datetime-local"></label>
+                <label>重复 <span class="hint">按北京时间</span><select name="repeat"><option value="once">单次</option><option value="daily">每天</option><option value="weekly">每周</option></select></label>
+              </div>
+              <label id="repeat-until" hidden>重复到 <span class="hint">可选 · 包含当天</span><input name="repeatUntil" type="date"></label>
+              <label class="check"><input name="dual" type="checkbox">重要事项，手机通知同时发送</label>
+              <div class="actions"><button class="primary" type="submit" id="task-save">添加待办</button>
+                <button class="secondary" type="button" id="cancel-edit" hidden>取消编辑</button></div>
+            </form>
+          </details>
+        </section>
+
+        <section class="card chat-panel panel-art" data-panel="chat" id="conversation" hidden>
+          <div class="section-line chat-heading">
+            <div class="chat-summary">
+              <dl class="session-facts" aria-label="当前会话">
+                <div><dt>会话</dt><dd id="session-label">微信私聊</dd></div>
+                <div><dt>当前模型</dt><dd id="session-model">—</dd></div>
+                <div><dt>最近互动</dt><dd id="session-last-active">—</dd></div>
+              </dl>
+            </div>
+            <button class="quiet" type="button" id="chat-refresh">刷新</button>
+          </div>
+          <details class="session-details" id="session-details" hidden>
+            <summary>会话详情</summary>
+            <dl class="session-facts">
+              <div><dt>代理</dt><dd id="session-agent">—</dd></div>
+              <div><dt>会话键</dt><dd id="session-key" class="session-code">—</dd></div>
+              <div><dt>会话 ID</dt><dd id="session-id" class="session-code">—</dd></div>
+              <div><dt>开始时间</dt><dd id="session-started">—</dd></div>
+              <div><dt>模型来源</dt><dd id="session-model-source">—</dd></div>
+              <div id="session-last-used-row" hidden><dt>最近实际使用</dt><dd id="session-last-used">—</dd></div>
+              <div><dt>上次上下文 / 上限</dt><dd id="session-tokens">—</dd></div>
+            </dl>
+          </details>
+          <div id="chat-scroll" class="chat-scroll" tabindex="0" aria-label="聊天记录">
+            <button type="button" class="quiet chat-older" id="chat-older" hidden>加载更早消息</button>
+            <div id="chat-messages"></div>
+          </div>
+        </section>
+
+        <section class="alerts-layout" data-panel="alerts" hidden>
+          <section class="card panel-art" id="mailbox">
+            <div class="section-line"><h2 id="mailbox-heading">提醒收件箱 <span class="count" id="unread">0</span></h2>
+              <button class="quiet" type="button" id="read-all">全部已读</button></div>
+            <p class="hint">主屏幕角标对应这里的未读提醒数。</p>
+            <div class="actions">
+              <button type="button" class="quiet" id="inbox-archive-view" aria-pressed="false">查看归档</button>
+              <button type="button" class="quiet" id="inbox-clear">清空</button>
+              <button type="button" class="quiet" id="inbox-restore-latest" hidden>恢复最近一批</button>
+            </div>
+            <div class="list panel-scroll" id="inbox" tabindex="0" role="region" aria-labelledby="mailbox-heading"></div>
+          </section>
+          <section class="card history panel-art" id="delivery-log">
+            <div class="section-line"><h2 id="delivery-heading">最近投递</h2><span class="hint">受理代表渠道收到请求</span></div>
+            <div class="list panel-scroll" id="history" tabindex="0" role="region" aria-labelledby="delivery-heading"></div>
+          </section>
+        </section>
+
+        <section class="settings-layout" data-panel="settings" id="settings-scroll" tabindex="0" aria-label="工作台设置" hidden>
+          <section class="card model-usage panel-art" id="model-usage">
+            <div class="section-line">
+              <h2>OpenClaw 模型</h2>
+              <button id="model-options-refresh" type="button" class="secondary">刷新</button>
+            </div>
+            <form class="model-selection" id="model-selection" hidden>
+              <label id="model-provider-choice" hidden>模型供应商 <select name="provider" disabled></select></label>
+              <label>对话模型 <select name="model" disabled><option>查询中</option></select></label>
+              <button id="model-apply" type="submit" class="primary" disabled>应用模型</button>
+            </form>
+            <p class="hint" id="model-selection-status" aria-live="polite"></p>
+            <div class="token-saving-settings">
+              <label class="check switch-control">
+                <input id="token-saving" type="checkbox" role="switch" aria-describedby="token-saving-hint" disabled>
+                <span class="switch-track" aria-hidden="true"></span>
+                <span>节省 Token</span>
+              </label>
+              <div class="hint" id="token-saving-hint">
+                <p>下一轮生效。模型保留本轮原文、引用、附件和工具结果，以及最近两个已完成回合的用户原文和最终答复。</p>
+                <p>更早的聊天细节有时需要你补充。旧待办和设置按需查询，完整聊天仍在对话页。费用降幅取决于缓存命中和模型调用次数。</p>
+              </div>
+            </div>
+            <div id="deepseek-usage" hidden>
+            <div class="model-balance">
+              <div class="section-line"><h3>DeepSeek 账户余额</h3><span class="pill" id="model-balance-status">查询中</span></div>
+              <dl class="model-balances" id="model-balances"></dl>
+              <p class="hint" id="model-balance-updated" aria-live="polite"></p>
+              <details class="model-alert-settings">
+                <summary>低余额提醒 <span id="model-alert-status" class="hint"></span></summary>
+                <form id="model-alert-form">
+                  <label class="check"><input name="enabled" type="checkbox">达到阈值时发到工作台收件箱</label>
+                  <div class="model-thresholds">
+                    <label>人民币阈值 <input name="CNY" type="number" inputmode="decimal" min="0" max="10000" step="0.01" required value="5"></label>
+                    <label>美元阈值 <input name="USD" type="number" inputmode="decimal" min="0" max="10000" step="0.01" required value="1"></label>
+                  </div>
+                  <button class="secondary" type="submit" disabled>保存提醒设置</button>
+                </form>
+              </details>
+            </div>
+            <div class="model-report">
+              <div class="section-line">
+                <h3>ROSETTE 用量</h3>
+                <label class="model-range"><span class="hint">统计范围</span><select id="model-days">
+                  <option value="1">今天</option>
+                  <option value="7">近 7 天</option>
+                  <option value="30" selected>近 30 天</option>
+                  <option value="90">近 90 天</option>
+                </select></label>
+              </div>
+              <dl class="model-kpis" id="model-kpis"></dl>
+              <p class="hint" id="model-report-status" aria-live="polite">正在查询用量…</p>
+              <div class="model-trend" id="model-trend" hidden>
+                <h4>每日 Token</h4>
+                <ol id="model-bars" class="model-bars" aria-label="每日 Token 用量"></ol>
+                <div class="model-axis hint" id="model-axis"></div>
+              </div>
+              <div class="model-breakdown" id="model-breakdown" hidden>
+                <div><h4>按模型</h4><dl class="activity-list" id="model-by-model"></dl></div>
+                <div><h4>按渠道</h4><dl class="activity-list" id="model-by-channel"></dl></div>
+              </div>
+            </div>
+            </div>
+          </section>
+          <section id="delivery-settings" class="card preferences panel-art">
+            <h2>投递顺序</h2>
+            <p class="hint">同级渠道并发，按所选条件继续下一级。</p>
+            <form id="policy-form">
+              <div class="policy-presets actions" aria-label="快速方案">
+                <button type="button" class="secondary" data-preset="default">微信优先</button>
+                <button type="button" class="secondary" data-preset="sequence">逐级备用</button>
+                <button type="button" class="secondary" data-preset="parallel">三路并发</button>
+              </div>
+              <div class="policy-channels">
+                <label>微信 <span class="hint" id="policy-wechat-status"></span><select name="wechat"></select></label>
+                <label>QQ <span class="hint" id="policy-qq-status"></span><select name="qq"></select></label>
+                <label>手机通知 <span class="hint" id="policy-push-status"></span><select name="push"></select></label>
+              </div>
+              <label>转入下一级的条件
+                <select name="fallback">
+                  <option value="unaccepted">全部未获受理（包括超时或待确认）</option>
+                  <option value="rejected">仅明确失败或本级全部不可用</option>
+                </select>
+              </label>
+              <div class="policy-preview"><span class="hint">当前顺序预览</span><p id="policy-preview" aria-live="polite"></p></div>
+              <div class="actions"><button class="primary" type="submit">保存投递设置</button></div>
+            </form>
+          </section>
+          <section class="card" id="wechat-activity">
+            <h2>微信发送观察</h2>
+            <p id="wechat-deferred" class="hint" hidden>微信会话待刷新，定时提醒按备用顺序投递。收到新的微信消息后恢复尝试。</p>
+            <dl class="activity-list">
+              <div><dt>最近收到消息</dt><dd id="wechat-inbound">—</dd></div>
+              <div><dt>静默时长</dt><dd id="wechat-silence">—</dd></div>
+              <div><dt>最近尝试发送</dt><dd id="wechat-last-outbound">—</dd></div>
+              <div><dt>本轮微信已受理</dt><dd id="wechat-outbound">—</dd></div>
+            </dl>
+            <p class="hint">静默满 12 小时，或本轮微信已受理 9 条时，ROSETTE 会提示你发「继续」。</p>
+          </section>
+          <section class="card panel-art" id="notifications">
+            <div class="section-line"><h2>手机通知</h2><span id="push-status" class="pill"></span></div>
+            <p class="hint">在 iPhone Safari 添加到主屏幕，从图标打开并启用通知。</p>
+            <div class="actions"><button class="primary" type="button" id="push-toggle">在本机启用</button>
+              <button class="secondary" type="button" id="push-test">测试手机</button>
+              <button class="secondary" type="button" id="fallback-test" hidden>测试备用链路</button></div>
+          </section>
+          <section class="card panel-art" id="daily-summary">
+            <h2>每日待办总结</h2>
+            <form id="settings-form">
+              <label>北京时间 <span class="hint">清空时间即关闭</span><input name="daily" type="time"></label>
+              <label class="check"><input name="dual" type="checkbox">手机通知同时发送</label>
+              <button class="secondary" type="submit">保存日报设置</button>
+            </form>
+          </section>
+          <footer class="font-credits">
+            <span>字体许可</span>
+            <a href="./fonts/CabinSketch-OFL.txt" lang="en">Cabin Sketch</a>
+            <a href="./fonts/Italianno-OFL.txt" lang="en">Italianno</a>
+          </footer>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

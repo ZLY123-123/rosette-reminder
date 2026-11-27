@@ -1,0 +1,18 @@
+{
+  "id": "reminder-desk",
+  "name": "ROSETTE 待办",
+  "kind": "context-engine",
+  "contextEngineIds": ["reminder-desk"],
+  "description": "为指定的微信或 QQ 私聊用户提供待办查询、创建、改期和完成工具。",
+  "contracts": { "tools": ["reminder_tasks"] },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "apiBase": { "type": "string" },
+      "wechatSender": { "type": "string" },
+      "wechatAccount": { "type": "string" },
+      "qqSender": { "type": "string" }
+    }
+  }
+}
