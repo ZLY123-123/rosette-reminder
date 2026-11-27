@@ -87,15 +87,23 @@ Once bound to your WeChat or QQ bot, simply chat naturally:
 
 WeChat conversation example. Schedule a check-in, then quote the reminder and reply “Done” to complete the task.
 
+![Example WeChat conversation showing a 9 AM check-in reminder and a quoted reply marking the task complete](./docs/screenshots/wechat-reminder.en.svg)
+
 ---
 
 ### 2. Web & Mobile PWA Workbench: Five Main Views
 
-The workbench includes five main views.
+The workbench includes five main views. The screenshots below use sample data.
 
 #### Overview
 - Highlights your **Next Upcoming Reminder** and Beijing Time schedule at a glance.
 - Previews **Today's Tasks**, **Unread Reminder Inbox**, **WeChat Connection Activity**, active routing chain, and subscribed mobile devices.
+
+![ROSETTE desktop overview showing the next reminder, tasks, inbox, and WeChat status](./docs/screenshots/web-overview-day.webp)
+
+<p align="center">
+  <img src="./docs/screenshots/web-mobile-night.webp" width="300" alt="ROSETTE mobile PWA workbench and bottom navigation">
+</p>
 
 #### Tasks
 - **Smart Grouping & Filters**: Automatically organizes pending tasks into **Overdue · Today · Upcoming · Unscheduled · Ended Cycles**, with one-tap filters for *Pending / Today / Completed / Archived*.
@@ -106,6 +114,8 @@ The workbench includes five main views.
 - **Media Previews**: Previews inbound WeChat photos inline and opens cached audio/video attachments.
 - **Origin & Context Badges**: Labels every outbound message as `Program` (scheduled alerts & system receipts), `AI`, or `AI + Program Follow-up`, and marks turns processed under `Save Tokens` mode.
 - **Expandable "Processing Details"**: Tap any WeChat message to inspect the step-by-step trace: gateway receipt, quote verification, model provider & latency, executed task operations, input/output/cache token breakdown, and backup channel deliveries.
+
+![ROSETTE conversation view with the check-in request’s processing details expanded and the scheduled reminder’s delivery result below](./docs/screenshots/web-conversation-night.webp)
 
 #### Alerts & Delivery Log
 - **Reminder Inbox**: Collects all PWA notifications and fallback alerts. Unread counts sync live to navigation badges and the **iOS Home-Screen App Icon Badge**. Mark read/unread, archive individual alerts, **clear the entire inbox**, or **restore the latest cleared batch** in one click.
